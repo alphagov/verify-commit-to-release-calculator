@@ -1,0 +1,8 @@
+doc-checking
+verify-frontend-federation-config
+frontend
+ida-hub
+verify-metadata
+verify-frontend
+verify-puppet
+ida-stub-idp
