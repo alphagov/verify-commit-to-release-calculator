@@ -5,7 +5,7 @@ The script looks at all the repos listed out in `repo_list.txt` and it will pick
 ## Running the script
 
 In order to get the logs generated, simply clone the repo and run
-`./generate_logs`.
+`./generate_logs.sh`.
 
 ## Changing the list of repos
 
