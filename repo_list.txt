@@ -1,6 +1,6 @@
 doc-checking
 verify-frontend-federation-config
-frontend
+verify-frontend-api
 ida-hub
 verify-metadata
 verify-frontend
