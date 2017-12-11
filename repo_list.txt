@@ -1,7 +1,7 @@
 doc-checking
 verify-frontend-federation-config
 verify-frontend-api
-ida-hub
+verify-hub
 verify-metadata
 verify-frontend
 verify-puppet
