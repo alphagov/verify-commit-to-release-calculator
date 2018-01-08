@@ -7,7 +7,8 @@ STARTDATE = '2017-2-1'
 NUMBEROFCOMMITS = 2000
 
 def get_tag(sha, tag)
-  `git tag --contains #{sha}| egrep '#{tag}_\\d{2,}' | sort -t _ -k 2 -g | head -1`.chomp
+  regex = tag == 'build' ? "'^#{tag}_\\d{2,}'" : "'#{tag}_\\d{2,}'"
+  `git tag --contains #{sha}| egrep #{regex} | sort -t _ -k 2 -g | head -1`.chomp
 end
 
 repo_name = ARGV[0]

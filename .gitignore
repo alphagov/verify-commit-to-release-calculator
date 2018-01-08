@@ -1,7 +1,7 @@
 time_from_commit_to_release_logs.csv
 doc-checking
 verify-frontend-api
-ida-hub
+verify-hub
 ida-stub-idp
 verify-frontend
 verify-frontend-federation-config
