@@ -1,4 +1,4 @@
 
-<%= line_chart @commits %>
+<%= line_chart @commits , xtitle: "Commit Time", ytitle: "Commit Lead Time" %>
 
-<%=  line_chart @average_lead_time_per_week %>
+<%=  line_chart @average_lead_time_per_week, xtitle: "Weeks", ytitle: "Commit average lead time"%>
