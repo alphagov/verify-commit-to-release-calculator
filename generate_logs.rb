@@ -20,11 +20,13 @@ repos = File.read("repo_list.txt").split("\n")
 repos.each do |repo|
   git_clone(repo)
 
-  log_file_name="time_from_commit_to_release_#{repo}.csv"
+  log_file_name = "time_from_commit_to_release_#{repo}.csv"
   calculated_values = ["Sha,Commit date,Release date,Commit to release (hours),Tag"] + compute_difference(repo)
 
-  IO.write(log_file_name, calculated_values.join("\n"))
+  output_dir_name = "output"
+  Dir.mkdir output_dir_name unless File.directory? output_dir_name
+  IO.write("../#{output_dir_name}/#{log_file_name}", calculated_values.join("\n"))
   Dir.chdir current_directory
-  puts "Done with : " + repo
+  puts "Done with : #{repo}"
 end
 
