@@ -1,11 +1,14 @@
 # Verify-commit-to-release-calculator
 
-The script looks at all the repos listed out in `repo_list.txt` and it will pick the first n (this is set in the `calculate_difference.rb`) number of commits. It will determine the time at which each individual commit was last changed (this is defined as the commit date by git),the time that the Jenkins build tagged it with a build number and also the time that the release automation script tagged it with a release number. The difference (time taken for a developer to push the commit and the commit ending up being prepped for release) is calculated and all of the above information are captured into a file called `time_from_commit_to_release_logs.csv`.
+The script looks at all the repos listed out in `repo_list.txt` and it will pick the first n (this is set in the `calculate_difference.rb`) number of commits. 
+
+The difference (time taken between developer's last changes and the commit ending up being released) 
+is calculated and all of the above information are captured in `output` folder
 
 ## Running the script
 
 In order to get the logs generated, simply clone the repo and run
-`./generate_logs.sh`.
+`./run.sh`.
 
 ## Changing the list of repos
 

@@ -1,2 +1,4 @@
 verify-frontend
 verify-hub
+doc-checking
+verify-hub-federation-config
