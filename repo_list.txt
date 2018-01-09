@@ -1,8 +1,1 @@
-doc-checking
-verify-frontend-federation-config
-verify-frontend-api
-verify-hub
-verify-metadata
 verify-frontend
-verify-puppet
-ida-stub-idp

@@ -9,3 +9,4 @@ verify-metadata
 verify-puppet
 .idea/
 release-time-graphs-app/.idea/
+verify-release-logs
