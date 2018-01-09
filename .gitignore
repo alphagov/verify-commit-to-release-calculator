@@ -7,3 +7,4 @@ verify-frontend
 verify-frontend-federation-config
 verify-metadata
 verify-puppet
+.idea/
