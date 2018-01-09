@@ -1,5 +1,6 @@
 require 'csv'
 require 'chartkick'
+require 'groupdate'
 
 class ReleaseTimeController < ApplicationController
 
@@ -15,6 +16,19 @@ class ReleaseTimeController < ApplicationController
       commits << commit_object
     end
     @commits = commits.map{|commit| [commit.commit_date.to_time.to_i, commit.lead_time] }
+
+    @weeks = commits.group_by_week(&:commit_date)
+
+    @average_lead_time_per_week = []
+    @weeks.each() do |week, commits|
+      sum = 0
+      number_of_commits = 0
+      commits.each() do |commit|
+        sum += commit.lead_time
+        number_of_commits = number_of_commits + 1
+      end
+      @average_lead_time_per_week << [week, sum/number_of_commits ]
+    end
   end
 
 end
