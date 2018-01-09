@@ -8,3 +8,4 @@ verify-frontend-federation-config
 verify-metadata
 verify-puppet
 .idea/
+release-time-graphs-app/.idea/
