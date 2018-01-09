@@ -1,4 +1,9 @@
+<h1>Select a repository</h1>
 
-<%= line_chart @commits , xtitle: "Commit Time", ytitle: "Commit Lead Time" %>
-
-<%=  line_chart @average_lead_time_per_week, xtitle: "Weeks", ytitle: "Commit average lead time"%>
+<ul>
+  <% @repos.each do |repo| %>
+    <li>
+      <%= link_to repo, repo_path(repo) %>
+    </li>
+  <% end %>
+</ul>
