@@ -7,5 +7,9 @@ verify-frontend
 verify-frontend-federation-config
 verify-metadata
 verify-puppet
+verify-hub-federation-config
 .idea/
 release-time-graphs-app/.idea/
+verify-release-logs
+.idea
+output
