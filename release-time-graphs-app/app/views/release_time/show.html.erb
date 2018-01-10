@@ -1,4 +1,25 @@
 
-<%= line_chart @commits_lead_time_graph , xtitle: "Commit Time", ytitle: "Commit Lead Time" %>
 
-<%=  line_chart @average_lead_time_per_week_graph, xtitle: "Weeks", ytitle: "Commit average lead time"%>
+<%= line_chart @commits_lead_time_graph ,
+               library: {
+                   plotOptions: {
+                     series: {
+                         marker: {
+                             enabled: true
+                         }
+                     }
+                   },
+                   chart: {
+                       zoomType: 'x'
+                   }
+               },
+               title: 'Actual commit lead times',
+               xtitle: "Commit Time",
+               ytitle: "Commit Lead Time" %>
+
+<%= line_chart @average_lead_time_per_week_graph,
+               library: {chart: {zoomType: 'x'}},
+               title: 'Average weekly commit lead times',
+               xtitle: "Weeks",
+               ytitle: "Commit average lead time" %>
+<%= @average_lead_time_per_week_graph.count %>

@@ -15,10 +15,10 @@ def get_release_date (release_tag, sha, repo_name)
   release_tag_number = release_tag.delete("^0-9")
   log_name = REPO_HASH[:"#{repo_name}"]
   release_date = `find ../verify-release-logs -maxdepth 1 -type d -execdir git grep -i -h -e "#{log_name}" --and -e '"#{release_tag_number}"' --and -e "Send release complete email" \\; | jq ".end_time"`.chomp
-  if !release_date.empty?
-      parsed_release_date = DateTime.parse(release_date)
-      time_from_commit_to_release = TimeDifference.between(parsed_release_date, DateTime.parse(commit_date)).in_hours
-      "#{sha},#{commit_date},#{release_date},#{time_from_commit_to_release},#{release_tag}"
+  unless release_date.empty?
+    parsed_release_date = DateTime.parse(release_date)
+    time_from_commit_to_release = TimeDifference.between(parsed_release_date, DateTime.parse(commit_date)).in_hours
+    "#{sha},#{commit_date},#{release_date},#{time_from_commit_to_release},#{release_tag}"
   end
 end
 
@@ -28,7 +28,6 @@ def compute_difference(repo_name)
 
   shas.each do |sha|
     release_tags = get_tags(sha, 'release')
-
     release_tags.each do |release_tag|
       line = get_release_date(release_tag, sha, repo_name)
       if line
