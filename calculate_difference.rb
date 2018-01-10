@@ -4,9 +4,6 @@ require 'date'
 require 'time_difference'
 require './repo_to_release_log_name.rb'
 
-STARTDATE = '2017-2-1'
-NUMBEROFCOMMITS = 2000
-
 def get_tag(sha, tag)
   regex = tag == 'build' ? "'^#{tag}_\\d{2,}'" : "'#{tag}_\\d{2,}'"
   `git tag --contains #{sha}| egrep #{regex} | sort -t _ -k 2 -g | head -1`.chomp
@@ -14,7 +11,7 @@ end
 
 def compute_difference(repo_name)
   return_value = []
-  shas = `git log --after=#{STARTDATE} --format=format:%H -#{NUMBEROFCOMMITS}`.split("\n")
+  shas = `git log --after="1 year ago" --format=format:%H`.split("\n")
   shas.each do |sha|
     release_tag = get_tag(sha, 'release')
 
