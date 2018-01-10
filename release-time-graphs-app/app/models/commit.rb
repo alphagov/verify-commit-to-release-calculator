@@ -1,5 +1,5 @@
 class Commit
-  attr_accessor :commit_date, :lead_time
+  attr_accessor :commit_date, :lead_time, :sha, :release_date, :release_tag
 
   def initialize props
     @commit_date = props[:commit_date]

@@ -15,9 +15,9 @@ class ReleaseTimeController < ApplicationController
     file = "../#{CSV_FOLDER}/#{params['repo']}.csv"
     return render :error unless File.exists?(file)
 
-    commits = load_commits_from_csv file
-    @commits_lead_time_graph = commits.map{|commit| [commit.commit_date, commit.lead_time] }
-    @average_lead_time_per_week_graph = average_lead_time_per_week commits
+    @commits = load_commits_from_csv file
+    @commits_lead_time_graph = @commits.map{|commit| [commit.commit_date, commit.lead_time] }
+    @average_lead_time_per_week_graph = average_lead_time_per_week @commits
   end
 
   private

@@ -1,25 +1,45 @@
 
 
-<%= line_chart @commits_lead_time_graph ,
-               library: {
-                   plotOptions: {
-                     series: {
-                         marker: {
-                             enabled: true
-                         }
-                     }
-                   },
-                   chart: {
-                       zoomType: 'x'
-                   }
-               },
-               title: 'Actual commit lead times',
-               xtitle: "Commit Time",
-               ytitle: "Commit Lead Time" %>
+<%= line_chart @commits_lead_time_graph,
+               chart_options(
+                 title: 'Actual commit lead times',
+                 xtitle: 'Commit Time',
+                 ytitle: 'Commit Lead Time') %>
 
 <%= line_chart @average_lead_time_per_week_graph,
-               library: {chart: {zoomType: 'x'}},
-               title: 'Average weekly commit lead times',
-               xtitle: "Weeks",
-               ytitle: "Commit average lead time" %>
-<%= @average_lead_time_per_week_graph.count %>
+               chart_options(
+                 title: 'Average weekly commit lead times',
+                 xtitle: 'Weeks',
+                 ytitle: 'Commit average lead time'
+               ) %>
+
+<h1>Commit data</h1>
+
+<table id="commit-table" class="sortable">
+  <thead>
+    <tr class="heading">
+      <th>Sha</th>
+      <th>Commit Date</th>
+      <th>Release Date</th>
+      <th>Release Tag</th>
+      <th>Lead Time to Prod</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @commits.each do |commit| %>
+      <tr>
+        <td><%= commit.sha %></td>
+        <td><%= commit.commit_date.strftime date_format %></td>
+        <td><%= commit.release_date.strftime date_format %></td>
+        <td><%= commit.release_tag %></td>
+        <td><%= commit.lead_time %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  $(document).ready( function () {
+    $('#commit-table').DataTable();
+  } );
+</script>
