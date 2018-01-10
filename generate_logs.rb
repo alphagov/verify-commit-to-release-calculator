@@ -21,7 +21,7 @@ repos.each do |repo|
   git_clone(repo)
 
   log_file_name = "time_from_commit_to_release_#{repo}.csv"
-  calculated_values = ["Sha,Commit date,Release date,Commit to release (hours),Tag"] + compute_difference(repo)
+  calculated_values = ["Sha,Commit date,Build date,Release date,Commit to build(hours),Commit to release (hours),Tag"] + compute_difference(repo)
 
   output_dir_name = "../output"
   Dir.mkdir output_dir_name if !File.directory? output_dir_name
