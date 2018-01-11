@@ -25,21 +25,21 @@ class ReleaseTimeController < ApplicationController
   end
 
   def average_lead_time_per_week(commits, tag_type)
-    average_lead_time_per_week=[]
+    average_lead_time_per_week = []
     weekly_sum = 0
-    weekly_count=0
-    current_week_beginning_date= DateTime.now.weeks_ago(1)
-    commits.each() do |commit|
-      lead_time = commit.send(tag_type)
+    weekly_count = 0
+    current_week_beginning_date = DateTime.now.weeks_ago(1)
+    commits.each do |commit|
+      lead_time = commit.try tag_type
 
-      if(commit.commit_date > current_week_beginning_date)
+      if commit.commit_date > current_week_beginning_date
         weekly_sum += lead_time
-        weekly_count = weekly_count + 1
+        weekly_count += 1
       else
         average_lead_time_per_week << [current_week_beginning_date,  weekly_count == 0?  0.00 : weekly_sum/weekly_count]
         weekly_count = 1
         weekly_sum = lead_time
-        current_week_beginning_date= current_week_beginning_date.weeks_ago(1)
+        current_week_beginning_date = current_week_beginning_date.weeks_ago(1)
       end
     end
     average_lead_time_per_week
