@@ -2,6 +2,10 @@ module ChartHelper
   def chart_options additional_options
     {
       library: {
+        xAxis: {
+          tickInterval: 7*24*60*60*1000
+        },
+             
         plotOptions: {
           series: {
             marker: {

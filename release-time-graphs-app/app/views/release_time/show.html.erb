@@ -22,6 +22,7 @@
     <tr class="heading">
       <th>Sha</th>
       <th>Commit Date</th>
+      <th>Build Date</th>
       <th>Release Date</th>
       <th>Release Tag</th>
       <th>Lead Time to Build</th>
@@ -33,6 +34,7 @@
       <tr>
         <td><%= commit.sha %></td>
         <td><%= commit.commit_date.strftime date_format %></td>
+        <td><%= commit.build_date.strftime date_format %></td>
         <td><%= commit.release_date.strftime date_format %></td>
         <td><%= commit.release_tag %></td>
         <td><%= commit.commit_to_build_lead_time %></td>

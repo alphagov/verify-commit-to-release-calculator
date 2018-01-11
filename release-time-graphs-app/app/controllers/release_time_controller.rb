@@ -50,6 +50,7 @@ class ReleaseTimeController < ApplicationController
       commits << Commit.new(
         sha: commit['Sha'],
         commit_date: DateTime.parse(commit['Commit date']),
+        build_date: DateTime.parse(commit['Build date']),
         release_date: DateTime.parse(commit['Release date']),
         release_tag: commit['Tag'],
         commit_to_release_lead_time: commit['Commit to release (hours)'].to_f.round(2),
