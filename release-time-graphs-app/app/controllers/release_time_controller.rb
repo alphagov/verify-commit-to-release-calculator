@@ -1,6 +1,7 @@
 require 'csv'
 require 'chartkick'
 require 'groupdate'
+require 'date'
 
 class ReleaseTimeController < ApplicationController
 
@@ -20,15 +21,23 @@ class ReleaseTimeController < ApplicationController
     @average_lead_time_per_week_graph = average_lead_time_per_week @commits
   end
 
-  private
-
   def average_lead_time_per_week commits
-    weeks = commits.group_by_week(&:commit_date)
-    weeks.map do |week, commits_per_week|
-      sum = commits_per_week.map(&:lead_time).inject(0, &:+)
-      number_of_commits = commits_per_week.count
-      [week, sum/number_of_commits ]
+    average_lead_time_per_week=[]
+    weekly_sum = 0
+    weekly_count=0
+    current_week_beginning_date= DateTime.now.weeks_ago(1)
+    commits.each() do |commit|
+      if(commit.commit_date > current_week_beginning_date )
+        weekly_sum += commit.lead_time
+        weekly_count = weekly_count + 1
+      else
+        average_lead_time_per_week << [current_week_beginning_date,  weekly_count == 0?  0.00 : weekly_sum/weekly_count]
+        weekly_count = 1
+        weekly_sum = commit.lead_time
+        current_week_beginning_date= current_week_beginning_date.weeks_ago(1)
+      end
     end
+    average_lead_time_per_week
   end
 
   def load_commits_from_csv file
