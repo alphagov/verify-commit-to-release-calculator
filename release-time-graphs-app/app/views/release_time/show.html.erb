@@ -1,16 +1,18 @@
 
 
-<%= line_chart @commits_lead_time_graph,
+<%= line_chart ([{name: "Lead time from commit to Aptly", data: @commits_to_build_lead_time_graph},
+  {name: "Lead time from commit to release", data: @commits_to_release_lead_time_graph}]),
                chart_options(
                  title: 'Actual commit lead times',
                  xtitle: 'Commit Time',
-                 ytitle: 'Commit Lead Time') %>
+                 ytitle: 'Commit Lead Time (in hours)') %>
 
-<%= line_chart @average_lead_time_per_week_graph,
+<%= line_chart ([{name: "Average lead time from commit to Aptly(in hours)", data: @average_build_lead_time_per_week_graph},
+  {name: "Average lead time from commit to release(in hours)", data: @average_release_lead_time_per_week_graph}]),
                chart_options(
                  title: 'Average weekly commit lead times',
                  xtitle: 'Weeks',
-                 ytitle: 'Commit average lead time'
+                 ytitle: 'Commit average lead time (in hours)'
                ) %>
 
 <h1>Commit data</h1>
@@ -22,6 +24,7 @@
       <th>Commit Date</th>
       <th>Release Date</th>
       <th>Release Tag</th>
+      <th>Lead Time to Build</th>
       <th>Lead Time to Prod</th>
     </tr>
   </thead>
@@ -32,7 +35,8 @@
         <td><%= commit.commit_date.strftime date_format %></td>
         <td><%= commit.release_date.strftime date_format %></td>
         <td><%= commit.release_tag %></td>
-        <td><%= commit.lead_time %></td>
+        <td><%= commit.commit_to_build_lead_time %></td>
+        <td><%= commit.commit_to_release_lead_time %></td>
       </tr>
     <% end %>
   </tbody>
