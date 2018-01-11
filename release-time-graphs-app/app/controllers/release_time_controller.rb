@@ -16,11 +16,12 @@ class ReleaseTimeController < ApplicationController
     file = "../#{CSV_FOLDER}/#{params['repo']}.csv"
     return render :error unless File.exists?(file)
 
-    @commits = load_commits_from_csv(file).select{|commit| commit.commit_to_release_lead_time < 1000 }
-    @commits_to_release_lead_time_graph = @commits.map{|commit| [commit.commit_date, commit.commit_to_release_lead_time] }
-    @commits_to_build_lead_time_graph = @commits.map{|commit| [commit.commit_date, commit.commit_to_build_lead_time] }
-    @average_build_lead_time_per_week_graph = average_lead_time_per_week(@commits, :commit_to_build_lead_time)
-    @average_release_lead_time_per_week_graph = average_lead_time_per_week(@commits, :commit_to_release_lead_time)
+    @commits = load_commits_from_csv(file)
+    @commits_to_plot = @commits.select{|commit| commit.commit_to_release_lead_time < 1000 }
+    @commits_to_release_lead_time_graph = @commits_to_plot.map{|commit| [commit.commit_date, commit.commit_to_release_lead_time] }
+    @commits_to_build_lead_time_graph = @commits_to_plot.map{|commit| [commit.commit_date, commit.commit_to_build_lead_time] }
+    @average_build_lead_time_per_week_graph = average_lead_time_per_week(@commits_to_plot, :commit_to_build_lead_time)
+    @average_release_lead_time_per_week_graph = average_lead_time_per_week(@commits_to_plot, :commit_to_release_lead_time)
   end
 
   def average_lead_time_per_week(commits, tag_type)
