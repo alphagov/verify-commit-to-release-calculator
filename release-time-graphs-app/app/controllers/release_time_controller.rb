@@ -8,12 +8,12 @@ class ReleaseTimeController < ApplicationController
   CSV_FOLDER = 'output'
 
   def index
-    @repos = Dir["../#{CSV_FOLDER}/*"].map{|filepath| File.basename(filepath, '.*') }
+    @repos = Dir["#{CSV_FOLDER}/*"].map{|filepath| File.basename(filepath, '.*') }
     return render :error if @repos.nil? || @repos.empty?
   end
 
   def show
-    file = "../#{CSV_FOLDER}/#{params['repo']}.csv"
+    file = "#{CSV_FOLDER}/#{params['repo']}.csv"
     return render :error unless File.exists?(file)
 
     @commits = load_commits_from_csv(file)

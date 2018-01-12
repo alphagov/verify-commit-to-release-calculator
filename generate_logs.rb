@@ -19,11 +19,11 @@ Dir.chdir current_directory
 repos = File.read("repo_list.txt").split("\n")
 repos.each do |repo|
   git_clone(repo)
-
+  puts "Calculating values for repository : " + repo
   log_file_name = "time_from_commit_to_release_#{repo}.csv"
   calculated_values = ["Sha,Commit date,Build date,Release date,Commit to build(hours),Commit to release (hours),Tag"] + compute_difference(repo)
 
-  output_dir_name = "../output"
+  output_dir_name = "../release-time-graphs-app/output"
   Dir.mkdir output_dir_name if !File.directory? output_dir_name
   IO.write("#{output_dir_name}/#{log_file_name}", calculated_values.join("\n"))
   Dir.chdir current_directory

@@ -1,0 +1,5 @@
+---
+applications:
+  - name: verify-commit-to-release-calculator
+    memory: 256M
+    buildpack: ruby_buildpack
